@@ -1,0 +1,317 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import WaitlistForm from '../components/WaitlistForm.astro';
+
+const title = 'Meridian — Specialty Coffee, Coming Soon';
+const description =
+  'Meridian is a specialty coffee brand launching soon. Join the waitlist for early access to single-origin roasts, curated blends, and a coffee experience built for the intentional drinker.';
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Meridian',
+  url: Astro.site?.toString(),
+  logo: new URL('/favicon.svg', Astro.site).toString(),
+  description,
+  slogan: 'Where Every Cup Finds Its Moment',
+  sameAs: [],
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Meridian',
+  url: Astro.site?.toString(),
+  description: 'Specialty coffee brand — coming soon.',
+};
+---
+
+<Base title={title} description={description} structuredData={[organizationSchema, websiteSchema]}>
+  <Nav />
+
+  <!-- HERO -->
+  <section class="relative min-h-[100svh] flex items-center overflow-hidden">
+    <!-- Background image with slow pan -->
+    <div class="absolute inset-0 -z-10">
+      <img
+        src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=2400&auto=format&fit=crop"
+        alt="Hands pouring a slow ribbon of coffee into a ceramic cup at dawn"
+        class="w-full h-full object-cover slow-pan"
+        loading="eager"
+        decoding="async"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-espresso/60 via-espresso/80 to-espresso"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-espresso/70 via-transparent to-transparent"></div>
+    </div>
+
+    <!-- Grain overlay -->
+    <div class="grain absolute inset-0 -z-[5] pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto px-6 md:px-10 pt-36 md:pt-32 pb-24 w-full">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 text-[0.78rem] tracking-[0.28em] uppercase opacity-80 mb-8">
+          <span class="block w-8 h-px bg-amber-brand"></span>
+          <span>A specialty coffee brand · Est. 2025</span>
+        </div>
+
+        <h1 class="font-display text-[clamp(2.75rem,7vw,5.5rem)] leading-[0.98] tracking-tight">
+          Something exceptional<br />
+          <span class="italic font-light text-amber-brand">is brewing.</span>
+        </h1>
+
+        <p class="mt-8 text-lg md:text-xl opacity-80 max-w-xl leading-relaxed font-light">
+          Meridian is a new specialty coffee house built around a simple belief —
+          that the best cup in your day deserves care at every step, from farm
+          to final pour.
+        </p>
+
+        <div id="waitlist" class="mt-10">
+          <p class="text-[0.8rem] tracking-[0.2em] uppercase opacity-60 mb-3">
+            Join the waitlist · First crack, early access
+          </p>
+          <WaitlistForm />
+        </div>
+
+        <div class="mt-12 flex flex-wrap items-center gap-x-8 gap-y-4 text-[0.78rem] tracking-[0.18em] uppercase opacity-70">
+          <span class="inline-flex items-center gap-2">
+            <span class="block w-1.5 h-1.5 rounded-full bg-amber-brand"></span>
+            Single-origin roasts
+          </span>
+          <span class="inline-flex items-center gap-2">
+            <span class="block w-1.5 h-1.5 rounded-full bg-amber-brand"></span>
+            Transparent sourcing
+          </span>
+          <span class="inline-flex items-center gap-2">
+            <span class="block w-1.5 h-1.5 rounded-full bg-amber-brand"></span>
+            Small-batch, always
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- decorative steam -->
+    <div class="absolute bottom-6 right-8 md:right-16 flex items-end gap-1.5 opacity-50 pointer-events-none">
+      <span class="block w-0.5 h-6 bg-gradient-to-t from-transparent via-cream/50 to-transparent steam-1"></span>
+      <span class="block w-0.5 h-8 bg-gradient-to-t from-transparent via-cream/50 to-transparent steam-2"></span>
+      <span class="block w-0.5 h-5 bg-gradient-to-t from-transparent via-cream/50 to-transparent steam-3"></span>
+    </div>
+
+    <!-- scroll cue -->
+    <a href="#story" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-[0.7rem] tracking-[0.28em] uppercase opacity-60 hover:opacity-100 hover:text-amber-brand transition flex flex-col items-center gap-2">
+      <span>Scroll</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="20" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M6 2v16M2 13l4 5 4-5"/></svg>
+    </a>
+  </section>
+
+  <!-- EDITORIAL QUOTE / BRAND STORY LEDE -->
+  <section id="story" class="relative py-28 md:py-36 overflow-hidden">
+    <div class="max-w-5xl mx-auto px-6 md:px-10">
+      <div class="flex items-center gap-4 text-[0.78rem] tracking-[0.28em] uppercase opacity-60 mb-10">
+        <span class="block w-6 h-px bg-amber-brand"></span>
+        <span>Chapter 01 — The Premise</span>
+      </div>
+
+      <blockquote class="font-display text-[clamp(1.8rem,4.2vw,3.4rem)] leading-[1.15] tracking-[-0.01em] font-light">
+        We started Meridian because the coffee aisle is loud,
+        <span class="italic text-amber-brand">and the cup on your counter deserves quiet.</span>
+        A careful sourcing partner. A roaster who respects what the farmer built.
+        And a brand that treats every morning like the small ceremony it already is.
+      </blockquote>
+
+      <div class="mt-14 grid md:grid-cols-[auto_1fr] items-center gap-6">
+        <div class="flex items-center gap-4">
+          <img
+            src="https://images.unsplash.com/photo-1494859802809-d069c3b71a8a?q=80&w=200&auto=format&fit=crop"
+            alt="Portrait of Meridian's founding roaster"
+            width="56"
+            height="56"
+            class="w-14 h-14 rounded-full object-cover border border-amber-brand/40"
+          />
+          <div>
+            <div class="text-sm font-medium">The Meridian founders</div>
+            <div class="text-xs opacity-60 tracking-[0.14em] uppercase">Written from the roastery · 2025</div>
+          </div>
+        </div>
+        <div class="md:justify-self-end">
+          <a href="/about" class="inline-flex items-center gap-2 text-[0.82rem] tracking-[0.18em] uppercase text-amber-brand hover:text-amber-brand-hover transition">
+            Read the full story
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE RITUAL — three-column editorial -->
+  <section id="ritual" class="relative py-24 md:py-32 bg-espresso-800/60 border-y border-cream/10">
+    <div class="max-w-6xl mx-auto px-6 md:px-10">
+      <div class="grid md:grid-cols-[1fr_1.3fr] gap-16 items-start">
+        <div class="md:sticky md:top-28">
+          <div class="flex items-center gap-4 text-[0.78rem] tracking-[0.28em] uppercase opacity-60 mb-6">
+            <span class="block w-6 h-px bg-amber-brand"></span>
+            <span>Chapter 02 — The Ritual</span>
+          </div>
+          <h2 class="font-display text-4xl md:text-5xl leading-[1.05] tracking-tight">
+            Three decisions<br />
+            <span class="italic text-amber-brand">we refuse to compromise.</span>
+          </h2>
+          <p class="mt-6 opacity-70 leading-relaxed max-w-md">
+            Meridian is a specialty coffee brand, but that phrase gets diluted.
+            For us it's a line in the sand — three decisions we make on your
+            behalf, every single bag.
+          </p>
+        </div>
+
+        <div class="space-y-14">
+          <article class="grid grid-cols-[auto_1fr] gap-6">
+            <div class="font-display text-5xl opacity-30 leading-none">01</div>
+            <div>
+              <h3 class="font-display text-2xl md:text-[1.75rem] tracking-tight mb-3">
+                Sourced with intention
+              </h3>
+              <p class="opacity-75 leading-relaxed">
+                We buy directly from growers we've visited — small farms and
+                women-led co-ops across Ethiopia, Colombia, and Guatemala.
+                Every lot is traceable to a harvest, a process, and a name on
+                the other side of the world.
+              </p>
+            </div>
+          </article>
+
+          <div class="hairline"></div>
+
+          <article class="grid grid-cols-[auto_1fr] gap-6">
+            <div class="font-display text-5xl opacity-30 leading-none">02</div>
+            <div>
+              <h3 class="font-display text-2xl md:text-[1.75rem] tracking-tight mb-3">
+                Roasted with precision
+              </h3>
+              <p class="opacity-75 leading-relaxed">
+                Small-batch profiles developed over dozens of cuppings, not
+                sent to a contract roaster. Our approach is light-to-medium —
+                we want you to taste where the coffee came from, not where it
+                was browned.
+              </p>
+            </div>
+          </article>
+
+          <div class="hairline"></div>
+
+          <article class="grid grid-cols-[auto_1fr] gap-6">
+            <div class="font-display text-5xl opacity-30 leading-none">03</div>
+            <div>
+              <h3 class="font-display text-2xl md:text-[1.75rem] tracking-tight mb-3">
+                Shared with purpose
+              </h3>
+              <p class="opacity-75 leading-relaxed">
+                Shipped within 72 hours of roast. Printed with the roast date,
+                not a "best by". Paired with a sourcing card so you know whose
+                morning made yours possible. Ritual, not commodity.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S COMING -->
+  <section class="relative py-24 md:py-32">
+    <div class="max-w-6xl mx-auto px-6 md:px-10">
+      <div class="flex items-center gap-4 text-[0.78rem] tracking-[0.28em] uppercase opacity-60 mb-8">
+        <span class="block w-6 h-px bg-amber-brand"></span>
+        <span>Chapter 03 — What's Coming</span>
+      </div>
+
+      <h2 class="font-display text-4xl md:text-5xl leading-[1.05] tracking-tight max-w-3xl">
+        A launch built for the intentional drinker — and a few first allocations.
+      </h2>
+
+      <div class="mt-16 grid md:grid-cols-3 gap-8">
+        <div class="group relative overflow-hidden rounded-2xl border border-cream/10 hover:border-amber-brand/50 transition">
+          <div class="aspect-[4/5] overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=1200&auto=format&fit=crop"
+              alt="Single-origin Ethiopian coffee cherries on a drying bed"
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-700"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-6 md:p-8">
+            <div class="text-[0.72rem] tracking-[0.2em] uppercase opacity-60 mb-2">Lot No. 01</div>
+            <h3 class="font-display text-2xl mb-2">Yirgacheffe, Ethiopia</h3>
+            <p class="text-sm opacity-70 leading-relaxed">
+              Bergamot, jasmine, stone fruit. A bright, floral lot from the
+              Gedeo zone — our launch single-origin.
+            </p>
+          </div>
+        </div>
+
+        <div class="group relative overflow-hidden rounded-2xl border border-cream/10 hover:border-amber-brand/50 transition">
+          <div class="aspect-[4/5] overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1442550528053-c431ecb55509?q=80&w=1200&auto=format&fit=crop"
+              alt="A neatly arranged pour-over coffee setup on a dark counter"
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-700"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-6 md:p-8">
+            <div class="text-[0.72rem] tracking-[0.2em] uppercase opacity-60 mb-2">House Blend</div>
+            <h3 class="font-display text-2xl mb-2">The Morning Blend</h3>
+            <p class="text-sm opacity-70 leading-relaxed">
+              Soft cocoa, baked apple, brown sugar. Engineered for the first cup
+              — steady under milk, clean as a pour-over.
+            </p>
+          </div>
+        </div>
+
+        <div class="group relative overflow-hidden rounded-2xl border border-cream/10 hover:border-amber-brand/50 transition">
+          <div class="aspect-[4/5] overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1497515114629-f71d768fd07c?q=80&w=1200&auto=format&fit=crop"
+              alt="Hands holding freshly roasted coffee beans in a burlap sack"
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-700"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-6 md:p-8">
+            <div class="text-[0.72rem] tracking-[0.2em] uppercase opacity-60 mb-2">Subscription</div>
+            <h3 class="font-display text-2xl mb-2">The Meridian Rotation</h3>
+            <p class="text-sm opacity-70 leading-relaxed">
+              A rotating curation — one single-origin and one seasonal blend,
+              every two weeks, the day they're roasted.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="relative py-24 md:py-32 border-t border-cream/10">
+    <div class="max-w-4xl mx-auto px-6 md:px-10 text-center">
+      <div class="inline-flex items-center gap-3 text-[0.78rem] tracking-[0.28em] uppercase opacity-60 mb-6">
+        <span class="block w-6 h-px bg-amber-brand"></span>
+        <span>Join the first 500</span>
+        <span class="block w-6 h-px bg-amber-brand"></span>
+      </div>
+      <h2 class="font-display text-[clamp(2.25rem,5vw,3.75rem)] leading-[1.05] tracking-tight">
+        Be there when we<br />
+        <span class="italic text-amber-brand">open the first roast.</span>
+      </h2>
+      <p class="mt-6 opacity-75 max-w-2xl mx-auto leading-relaxed">
+        Waitlist members get early access to the launch lot, a founders'
+        sourcing letter, and a one-time first-bag offer — in that order, only
+        once, before anyone else.
+      </p>
+      <div class="mt-10 flex justify-center">
+        <WaitlistForm />
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>

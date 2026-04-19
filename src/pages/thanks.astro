@@ -1,0 +1,176 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const title = "You're In — Meridian Coffee";
+const description =
+  "Thanks for joining the Meridian waitlist. You'll be among the first to know when we launch. In the meantime, explore our story and what we're building.";
+
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: title,
+  url: new URL('/thanks', Astro.site).toString(),
+  description,
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'Meridian',
+    url: Astro.site?.toString(),
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: Astro.site?.toString() },
+    { '@type': 'ListItem', position: 2, name: "You're In", item: new URL('/thanks', Astro.site).toString() },
+  ],
+};
+
+const shareText = encodeURIComponent(
+  "I just joined the Meridian coffee waitlist — specialty single-origin roasts launching soon."
+);
+const shareUrl = encodeURIComponent(Astro.site?.toString() || '');
+---
+
+<Base
+  title={title}
+  description={description}
+  structuredData={[webPageSchema, breadcrumbSchema]}
+  ogType="website"
+>
+  <Nav />
+
+  <section class="relative min-h-[80svh] flex items-center overflow-hidden">
+    <div class="absolute inset-0 -z-10">
+      <img
+        src="https://images.unsplash.com/photo-1497515114629-f71d768fd07c?q=80&w=2400&auto=format&fit=crop"
+        alt="Freshly roasted coffee beans resting in a burlap sack"
+        class="w-full h-full object-cover slow-pan"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-espresso/70 via-espresso/85 to-espresso"></div>
+    </div>
+    <div class="grain absolute inset-0 -z-[5]"></div>
+
+    <div class="max-w-3xl mx-auto px-6 md:px-10 pt-32 pb-24 text-center w-full">
+      <div class="inline-flex items-center justify-center w-14 h-14 rounded-full border border-amber-brand/50 bg-amber-brand/10 mb-8">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="text-amber-brand">
+          <path d="M20 6 9 17l-5-5" />
+        </svg>
+      </div>
+
+      <div class="text-[0.78rem] tracking-[0.28em] uppercase opacity-70 mb-6">
+        Meridian coffee · Early access
+      </div>
+
+      <h1 class="font-display text-[clamp(2.5rem,6.5vw,5rem)] leading-[1] tracking-tight">
+        You're<br />
+        <span class="italic text-amber-brand">on the list.</span>
+      </h1>
+
+      <p class="mt-8 text-lg md:text-xl opacity-85 max-w-xl mx-auto leading-relaxed font-light">
+        Welcome to the quiet side of the waitlist. You'll be among the first
+        to hear when we open — and the first to see the launch-lot we've been
+        roasting for this moment.
+      </p>
+
+      <div class="mt-10 flex items-center justify-center gap-4 text-[0.78rem] tracking-[0.18em] uppercase opacity-70">
+        <span class="block w-8 h-px bg-amber-brand"></span>
+        <span>Nothing to do now</span>
+        <span class="block w-8 h-px bg-amber-brand"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative py-20 md:py-28">
+    <div class="max-w-4xl mx-auto px-6 md:px-10">
+      <div class="grid md:grid-cols-3 gap-8 md:gap-12">
+        <div>
+          <div class="font-display text-3xl opacity-30 mb-4">01</div>
+          <h2 class="font-display text-xl md:text-2xl mb-3">Check your inbox</h2>
+          <p class="text-sm opacity-75 leading-relaxed">
+            A confirmation landed from <span class="text-amber-brand">onboarding@resend.dev</span>.
+            If you don't see it in a minute, peek at spam — and whitelist us.
+          </p>
+        </div>
+        <div>
+          <div class="font-display text-3xl opacity-30 mb-4">02</div>
+          <h2 class="font-display text-xl md:text-2xl mb-3">Read the story</h2>
+          <p class="text-sm opacity-75 leading-relaxed">
+            <a href="/about" class="text-amber-brand hover:text-amber-brand-hover transition">Our origin story</a>
+            covers how we source, roast, and ship — the full philosophy before
+            the launch drops.
+          </p>
+        </div>
+        <div>
+          <div class="font-display text-3xl opacity-30 mb-4">03</div>
+          <h2 class="font-display text-xl md:text-2xl mb-3">Pass it on</h2>
+          <p class="text-sm opacity-75 leading-relaxed">
+            Know someone who loves a good pour-over? Share the news — and
+            they can join the list before it closes.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative py-16 md:py-24 border-t border-cream/10">
+    <div class="max-w-3xl mx-auto px-6 md:px-10 text-center">
+      <h3 class="text-[0.78rem] tracking-[0.28em] uppercase opacity-60 mb-6">
+        Share Meridian
+      </h3>
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <a
+          href={`https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 text-[0.82rem] tracking-[0.14em] uppercase border border-cream/20 hover:border-amber-brand hover:text-amber-brand transition px-5 py-3 rounded-full"
+        >
+          Share on X
+        </a>
+        <a
+          href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 text-[0.82rem] tracking-[0.14em] uppercase border border-cream/20 hover:border-amber-brand hover:text-amber-brand transition px-5 py-3 rounded-full"
+        >
+          Share on Facebook
+        </a>
+        <button
+          type="button"
+          id="copy-link"
+          class="inline-flex items-center gap-2 text-[0.82rem] tracking-[0.14em] uppercase border border-cream/20 hover:border-amber-brand hover:text-amber-brand transition px-5 py-3 rounded-full"
+        >
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+      <p class="mt-10 text-sm opacity-70">
+        <a href="/" class="text-amber-brand hover:text-amber-brand-hover transition">← Back to home</a>
+        <span class="mx-3 opacity-40">·</span>
+        <a href="/about" class="text-amber-brand hover:text-amber-brand-hover transition">Our story</a>
+      </p>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      const btn = document.getElementById('copy-link');
+      if (!btn) return;
+      btn.addEventListener('click', async () => {
+        const label = btn.querySelector('.copy-label');
+        try {
+          await navigator.clipboard.writeText(window.location.origin);
+          if (label) label.textContent = 'Copied!';
+          setTimeout(() => { if (label) label.textContent = 'Copy link'; }, 1800);
+        } catch (e) {
+          if (label) label.textContent = 'Press Ctrl+C';
+        }
+      });
+    })();
+  </script>
+
+  <Footer />
+</Base>

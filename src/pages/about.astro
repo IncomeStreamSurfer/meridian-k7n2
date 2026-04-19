@@ -1,0 +1,285 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import WaitlistForm from '../components/WaitlistForm.astro';
+
+const title = 'Our Story | Meridian Coffee';
+const description =
+  "Learn how Meridian was built — from farm relationships to roast profiles. We believe the best cup is one made with care at every step. Discover our philosophy.";
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Meridian',
+  url: Astro.site?.toString(),
+  logo: new URL('/favicon.svg', Astro.site).toString(),
+  description,
+  foundingDate: '2025',
+  slogan: 'Where Every Cup Finds Its Moment',
+};
+
+const aboutPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'Our Story — Meridian Coffee',
+  url: new URL('/about', Astro.site).toString(),
+  description,
+  mainEntity: {
+    '@type': 'Organization',
+    name: 'Meridian',
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: Astro.site?.toString() },
+    { '@type': 'ListItem', position: 2, name: 'Our Story', item: new URL('/about', Astro.site).toString() },
+  ],
+};
+---
+
+<Base
+  title={title}
+  description={description}
+  structuredData={[organizationSchema, aboutPageSchema, breadcrumbSchema]}
+>
+  <Nav />
+
+  <!-- PAGE HERO -->
+  <section class="relative pt-36 md:pt-40 pb-16 md:pb-24">
+    <div class="max-w-5xl mx-auto px-6 md:px-10">
+      <nav class="text-[0.72rem] tracking-[0.2em] uppercase opacity-60 mb-8" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-amber-brand transition">Home</a>
+        <span class="mx-2 opacity-50">/</span>
+        <span>Our Story</span>
+      </nav>
+
+      <div class="flex items-center gap-4 text-[0.78rem] tracking-[0.28em] uppercase opacity-60 mb-6">
+        <span class="block w-6 h-px bg-amber-brand"></span>
+        <span>An artisan coffee roaster · Coming 2025</span>
+      </div>
+
+      <h1 class="font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-[1] tracking-tight max-w-3xl">
+        The story behind<br />
+        <span class="italic text-amber-brand">Meridian.</span>
+      </h1>
+
+      <p class="mt-8 text-lg md:text-xl opacity-80 max-w-2xl leading-relaxed font-light">
+        We didn't start Meridian to be another specialty label on a crowded
+        shelf. We started it because the craft of coffee — the real one, the
+        one that begins at altitude and ends at a kitchen counter — kept
+        getting lost in translation.
+      </p>
+    </div>
+  </section>
+
+  <!-- EDITORIAL IMAGE -->
+  <section class="relative">
+    <div class="max-w-6xl mx-auto px-6 md:px-10">
+      <figure class="relative overflow-hidden rounded-2xl border border-cream/10">
+        <img
+          src="https://images.unsplash.com/photo-1442550528053-c431ecb55509?q=80&w=2400&auto=format&fit=crop"
+          alt="Coffee cherries being sorted by hand on a wooden table"
+          class="w-full h-[340px] md:h-[520px] object-cover"
+          loading="lazy"
+        />
+        <figcaption class="absolute bottom-6 left-6 md:bottom-10 md:left-10 text-xs tracking-[0.18em] uppercase opacity-80 bg-espresso/70 backdrop-blur px-3 py-1.5 rounded-full">
+          Origin Notes · Yirgacheffe, Ethiopia
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- CHAPTER 01 -->
+  <section class="relative py-24 md:py-32">
+    <div class="max-w-4xl mx-auto px-6 md:px-10">
+      <div class="text-[0.78rem] tracking-[0.28em] uppercase opacity-60 mb-4">
+        Chapter 01
+      </div>
+      <h2 class="font-display text-3xl md:text-[2.5rem] leading-tight mb-8">
+        A beginning at the farm gate
+      </h2>
+      <div class="space-y-6 text-[1.05rem] leading-[1.85] opacity-85 font-light">
+        <p>
+          Meridian began with a short flight and a long drive. Our founders
+          spent a season visiting washing stations in Ethiopia, farms in
+          Colombia's Huila region, and women-led co-ops across western
+          Guatemala — listening more than talking, tasting more than buying.
+        </p>
+        <p>
+          What we kept hearing was a quiet frustration. Growers were being paid
+          commodity prices for harvest-quality coffee, and roasters were being
+          forced to buy through auction lots that hid every decision that made
+          a lot special. There was no through-line from the farmer's care to
+          the drinker's cup.
+        </p>
+        <p>
+          We built Meridian to restore that line. Every coffee we sell is
+          traceable to a harvest, a process, and a name. Every price paid
+          exceeds the Fairtrade minimum — often by two or three times. And
+          every bag ships with a sourcing card so the story doesn't get lost
+          in the supply chain.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PULL QUOTE -->
+  <section class="relative py-20 md:py-28 border-y border-cream/10 bg-espresso-800/40">
+    <div class="max-w-5xl mx-auto px-6 md:px-10 text-center">
+      <div class="text-[0.72rem] tracking-[0.28em] uppercase opacity-60 mb-8">
+        Our Belief
+      </div>
+      <blockquote class="font-display text-[clamp(1.6rem,3.6vw,2.8rem)] leading-[1.2] tracking-tight font-light italic">
+        "Specialty coffee is a promise —
+        <span class="text-amber-brand">that we will not outsource the parts that matter.</span>
+        Sourcing. Profiling. Roasting. Packing. Telling you honestly what's in the bag."
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- CHAPTER 02 -->
+  <section class="relative py-24 md:py-32">
+    <div class="max-w-4xl mx-auto px-6 md:px-10">
+      <div class="text-[0.78rem] tracking-[0.28em] uppercase opacity-60 mb-4">
+        Chapter 02
+      </div>
+      <h2 class="font-display text-3xl md:text-[2.5rem] leading-tight mb-8">
+        The roast, developed not rushed
+      </h2>
+      <div class="space-y-6 text-[1.05rem] leading-[1.85] opacity-85 font-light">
+        <p>
+          Most specialty coffee in the UK and US is roasted on shared
+          equipment, to profiles written for maximum throughput. It's efficient
+          — and it's why so many bags taste the same. Meridian rejects that
+          shortcut entirely.
+        </p>
+        <p>
+          Our house roaster, a 15-kilo Loring Kestrel, lives with us — not
+          with a contract partner. Every coffee is profiled over a series of
+          cuppings, then run as small batches so we can react to the lot, the
+          humidity, and the season. The result is coffee that tastes like
+          <em>where it's from</em>, not like our brand template.
+        </p>
+        <p>
+          Light-to-medium is our default, though we're not ideologues about
+          it. Some lots want a little more Maillard. Some want less. We pick
+          the profile the coffee asks for, and we write it down — on the bag,
+          on the sourcing card, and in the quiet note that comes with your
+          first order.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TWO-COLUMN SPLIT -->
+  <section class="relative py-16 md:py-24 bg-espresso-800/40 border-t border-cream/10">
+    <div class="max-w-6xl mx-auto px-6 md:px-10 grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+      <div>
+        <img
+          src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1600&auto=format&fit=crop"
+          alt="A warm wooden bar at a specialty coffee roastery with pour-over equipment"
+          class="w-full h-full object-cover rounded-2xl border border-cream/10"
+          loading="lazy"
+        />
+      </div>
+      <div>
+        <div class="text-[0.78rem] tracking-[0.28em] uppercase opacity-60 mb-4">Chapter 03</div>
+        <h2 class="font-display text-3xl md:text-[2.25rem] leading-tight mb-6">
+          A ritual, not a routine
+        </h2>
+        <div class="space-y-5 text-[1.02rem] leading-[1.8] opacity-85 font-light">
+          <p>
+            The third decision Meridian refuses to compromise is the one
+            closest to you. We ship within 72 hours of roast. We print the
+            roast date, not a vague "best by". And we design our packaging to
+            feel like it belongs on a kitchen counter — not a display shelf.
+          </p>
+          <p>
+            It's a small difference. But over twelve months and hundreds of
+            cups, it is the difference between habit and ritual — between
+            coffee that happens to you and coffee you choose every morning.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="relative py-24 md:py-32">
+    <div class="max-w-6xl mx-auto px-6 md:px-10">
+      <div class="text-[0.78rem] tracking-[0.28em] uppercase opacity-60 mb-4">
+        What we believe
+      </div>
+      <h2 class="font-display text-3xl md:text-[2.5rem] leading-tight mb-12 max-w-3xl">
+        Four things we'll never trade for growth.
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-x-12 gap-y-12">
+        <div>
+          <div class="font-display text-xl opacity-40 mb-3">01</div>
+          <h3 class="font-display text-xl md:text-2xl mb-3">Transparent pricing</h3>
+          <p class="opacity-75 leading-relaxed">
+            We publish the FOB price we pay growers on every sourcing card.
+            If we ever stop, assume something has gone wrong — not the other
+            way round.
+          </p>
+        </div>
+        <div>
+          <div class="font-display text-xl opacity-40 mb-3">02</div>
+          <h3 class="font-display text-xl md:text-2xl mb-3">Small batches, forever</h3>
+          <p class="opacity-75 leading-relaxed">
+            If we can't profile a lot on our own roaster, we don't buy it.
+            Scale will never be a reason to outsource the craft.
+          </p>
+        </div>
+        <div>
+          <div class="font-display text-xl opacity-40 mb-3">03</div>
+          <h3 class="font-display text-xl md:text-2xl mb-3">Seasonality over catalog</h3>
+          <p class="opacity-75 leading-relaxed">
+            Our menu rotates because coffee does. We won't sell a lot past its
+            window just to keep a product alive on the website.
+          </p>
+        </div>
+        <div>
+          <div class="font-display text-xl opacity-40 mb-3">04</div>
+          <h3 class="font-display text-xl md:text-2xl mb-3">Direct, honest contact</h3>
+          <p class="opacity-75 leading-relaxed">
+            Every email to the Meridian inbox is read by a person who has held
+            the bag you bought. That will not change as we grow.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="relative py-24 md:py-32 border-t border-cream/10">
+    <div class="max-w-3xl mx-auto px-6 md:px-10 text-center">
+      <div class="inline-flex items-center gap-3 text-[0.78rem] tracking-[0.28em] uppercase opacity-60 mb-6">
+        <span class="block w-6 h-px bg-amber-brand"></span>
+        <span>The next chapter</span>
+        <span class="block w-6 h-px bg-amber-brand"></span>
+      </div>
+      <h2 class="font-display text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.1] tracking-tight mb-6">
+        Join us before the first roast.
+      </h2>
+      <p class="opacity-75 leading-relaxed max-w-xl mx-auto mb-10">
+        Early-access members receive our founders' sourcing letter, the first
+        launch-lot allocation, and a single first-bag offer — before the shop
+        opens to anyone else.
+      </p>
+      <div class="flex justify-center">
+        <WaitlistForm />
+      </div>
+      <p class="mt-10 text-sm opacity-60">
+        Prefer the short version? <a href="/" class="text-amber-brand hover:text-amber-brand-hover transition">Return home</a>.
+      </p>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
