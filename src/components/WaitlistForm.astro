@@ -1,0 +1,81 @@
+---
+// Inline email-capture form. Submits to /api/subscribe.
+---
+
+<form
+  id="waitlist-form"
+  method="POST"
+  action="/api/subscribe"
+  class="w-full max-w-lg"
+  novalidate
+>
+  <div class="flex flex-col sm:flex-row gap-2 sm:gap-0 sm:rounded-full sm:border sm:border-cream/20 sm:bg-espresso/50 sm:backdrop-blur sm:p-1.5 transition focus-within:border-amber-brand/60">
+    <label for="email" class="sr-only">Email address</label>
+    <input
+      id="email"
+      name="email"
+      type="email"
+      required
+      placeholder="you@morning.coffee"
+      autocomplete="email"
+      class="flex-1 bg-espresso/60 sm:bg-transparent border border-cream/20 sm:border-0 rounded-full sm:rounded-full px-5 py-3.5 text-[0.95rem] placeholder:text-cream/40 text-cream focus:outline-none focus:border-amber-brand/60 sm:focus:outline-none"
+    />
+    <button
+      type="submit"
+      class="inline-flex items-center justify-center gap-2 bg-amber-brand hover:bg-amber-brand-hover text-espresso font-medium text-[0.85rem] tracking-[0.14em] uppercase px-6 py-3.5 rounded-full transition disabled:opacity-60 disabled:cursor-not-allowed"
+    >
+      <span class="label">Reserve My Place</span>
+      <span class="spinner hidden">
+        <svg class="animate-spin" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56" stroke-linecap="round"/></svg>
+      </span>
+    </button>
+  </div>
+  <p id="form-status" class="mt-3 text-sm opacity-70 min-h-[1.25rem]" aria-live="polite"></p>
+  <p class="mt-2 text-xs opacity-50">No spam. Launch day, farm stories, and the first crack of the season. Unsubscribe any time.</p>
+</form>
+
+<script is:inline>
+  (function () {
+    const form = document.getElementById('waitlist-form');
+    if (!form) return;
+    const status = document.getElementById('form-status');
+    const button = form.querySelector('button[type="submit"]');
+    const label = button.querySelector('.label');
+    const spinner = button.querySelector('.spinner');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const email = (formData.get('email') || '').toString().trim();
+      if (!email) return;
+
+      button.disabled = true;
+      label.textContent = 'Sending…';
+      spinner.classList.remove('hidden');
+      status.textContent = '';
+      status.style.color = '';
+
+      try {
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok) {
+          window.location.href = '/thanks';
+          return;
+        }
+        status.textContent = data?.error || 'Something went wrong. Please try again.';
+        status.style.color = '#e6a463';
+      } catch (err) {
+        status.textContent = 'Network error. Please try again.';
+        status.style.color = '#e6a463';
+      } finally {
+        button.disabled = false;
+        label.textContent = 'Reserve My Place';
+        spinner.classList.add('hidden');
+      }
+    });
+  })();
+</script>

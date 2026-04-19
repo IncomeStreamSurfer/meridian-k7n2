@@ -1,0 +1,55 @@
+---
+import '../styles/global.css';
+import SEOHead from '../components/SEOHead.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  structuredData?: object | object[];
+  canonicalUrl?: string;
+  ogType?: string;
+}
+
+const { title, description, structuredData, canonicalUrl, ogType } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <SEOHead
+      title={title}
+      description={description}
+      structuredData={structuredData}
+      canonicalUrl={canonicalUrl}
+      ogType={ogType}
+    />
+  </head>
+  <body class="bg-espresso text-cream font-sans antialiased selection:bg-amber-brand/40 selection:text-cream">
+    <slot />
+
+    <script is:inline>
+      // Persist theme. Default: dark.
+      (function () {
+        const KEY = 'meridian-theme';
+        const stored = localStorage.getItem(KEY);
+        const root = document.documentElement;
+        if (stored === 'light') root.classList.remove('dark');
+        else root.classList.add('dark');
+
+        window.__toggleTheme = function () {
+          const isDark = root.classList.toggle('dark');
+          localStorage.setItem(KEY, isDark ? 'dark' : 'light');
+          document.body.classList.toggle('bg-espresso', isDark);
+          document.body.classList.toggle('text-cream', isDark);
+          document.body.classList.toggle('bg-cream', !isDark);
+          document.body.classList.toggle('text-espresso', !isDark);
+        };
+        // sync body classes on load
+        if (!root.classList.contains('dark')) {
+          document.body.classList.remove('bg-espresso', 'text-cream');
+          document.body.classList.add('bg-cream', 'text-espresso');
+        }
+      })();
+    </script>
+  </body>
+</html>
