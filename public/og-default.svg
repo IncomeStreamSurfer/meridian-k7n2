@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1A1410"/>
+      <stop offset="1" stop-color="#2E241C"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <circle cx="1020" cy="160" r="90" fill="none" stroke="#B8722E" stroke-width="3" opacity="0.6"/>
+  <circle cx="1020" cy="160" r="4" fill="#B8722E"/>
+  <text x="90" y="330" fill="#F5EFE6" font-family="Georgia, serif" font-size="96" font-weight="600" letter-spacing="-2">Meridian</text>
+  <text x="93" y="395" fill="#B8722E" font-family="Georgia, serif" font-style="italic" font-size="40">Where every cup finds its moment.</text>
+  <text x="93" y="550" fill="#F5EFE6" font-family="Inter, sans-serif" font-size="22" letter-spacing="4" opacity="0.7">SPECIALTY COFFEE · COMING SOON</text>
+</svg>
